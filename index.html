@@ -21,29 +21,28 @@
 
 <body>
     <div>
-        <div class="container">
+        <div class="container" id="directions">
             <p>Answer the following questions before the clock runs out.
                 <br>
                 Wrong answers will have a score and time penalty.
                 <br>
                 Good luck!
             </p>
-            <div class="controls">
-                <button class="btn" id="start-btn">Start Quiz</button>
+            <div class="controls" id="controls">
+                <button class="btn start-btn" id="start-btn">Start Quiz</button>
             </div>
         </div>
     </div>
-    <header class="row">
-        <button type="button" class="btn" id="hiscore-btn">High Scores</button>
+
+   
+    <main>
         <div>
             <h3>Time Remaining: <span id="timeClock"></span></h3>
         </div>
-    </header>
-    <main>
         <div class="row">
             <div class="container" id="question-container">
                 <div id="question">Questions</div>
-                <div id="answer-btns" class="btn">
+                <div id="answer-btns" class="btn-grid">
                     <button class="btn">Answer #1</button>
                     <button class="btn">Answer #2</button>
                     <button class="btn">Answer #3</button>
@@ -51,8 +50,33 @@
                 </div>
             </div>
         </div>
-
-
+        <div class="row">
+            <div class="container col-md-10 hide" id="gameOverEl">
+                <div id="scoreEl">
+                    <h1> You scored <span id="score"></span> points.</h1>
+                    <hr/>
+                    <h4>Save your score.</h4>
+                    <form id="initialsForm" class="form-inline">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="initials" class="sr-only">Initials</label>
+                            <input type="text" class="form-control" id="initials" placeholder="Initials"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container col-md-10 hide" id="highScoresEl">
+                <h1>High Scores</h1>
+                <ul id="highScoresList"></ul>
+                <button type="button" class="btn btn-outline-dark col-md-4" id="clear-btn">Clear High Scores</button>
+                <button type="button" class="btn btn-outline-dark col-md-4" id="reload-btn">Try Again?</button>
+            </div>
+        </div>
+        <div class="row">
+            <button type="button" class="btn" id="hiscore-btn">High Scores</button>
+        </div>
     </main>
 
 

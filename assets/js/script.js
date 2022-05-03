@@ -78,7 +78,7 @@ function startQuiz() {
     currentQuestionIndex = 0;
 
     questionContainerEl.classList.remove("hide");
-    setNextQuestion();
+    nextQuestion();
 }
 
 //shows next question
@@ -86,9 +86,49 @@ function nextQuestion() {
     reset();
     showQuestion(cycledQuestions[currentQuestionIndex]);
 }
-
+//shows questions and answers
 function showQuestion(question) {
     questionEl.innerText = question.question;
+
+    question.answers.forEach((answer) => {
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+        button.classList.add("btn");
+
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
+        button.addEventListener("click", selectAnswer);
+        answerBtnsEl.appendChild(button);
+    });
+}
+//clears answers
+function reset() {
+    while (answerBtnsEl.firstChild) {
+        answerBtnsEl.removeChild(answerBtnsEl.firstChild);
+    }
+}
+
+//select answers and check to see if answer is right
+function selectAnswer(event) {
+
+    let selectedButton = event.target;
+    let correct = selectedButton.dataset.correct;
+
+    if (correct) {
+        correctAnswer();
+    }
+    else {
+        wrongAnswer();
+    }
+
+    if (cycledQuestions.length > currentQuestionIndex + 1) {
+        currentQuestionIndex++;
+        nextQuestion();
+    }
+    else {
+        endGame();
+    }
 }
 
 //Timer
