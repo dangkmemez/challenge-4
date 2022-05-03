@@ -1,11 +1,20 @@
 //Variables
-const questionEl = $("#question");
-const questionContainerEl = $("#question-container");
-const startButtonEl = $("#start-btn");
-const showTimer = $("#timeClock");
-const answerBtnsEl = $("#answer-btns");
-const directionsEl = $("#directions");
-const controlsEl = $("#controls");
+
+const highscoreBtn = document.getElementById("highscore-btn");
+const clearBtn = document.getElementById("clear-btn");
+const reloadBtn = document.getElementById("reload-btn");
+const showTimer = document.getElementById("timeClock");
+const startButton = document.getElementById("start-btn");
+const questionContainerEl = document.getElementById("question-container");
+const questionEl = document.getElementById("question");
+const answerBtnsEl = document.getElementById("answer-btns");
+const controlsEl = document.getElementById("controls");
+const directionsEl = document.getElementById("directions");
+const gameOverEl = document.getElementById("gameOverEl");
+const scoreDisplay = document.getElementById("score");
+let cycledQuestions;
+let currentQuestionIndex;
+
 //timer vars
 var counter = 60;
 var interval;
@@ -59,10 +68,11 @@ let questions = [
     },
 ];
 
+//starts the quiz and timer
 function startQuiz() {
     startTimer();
     startButton.classList.add("hide");
-    introEl.classList.add("hide");
+    directionsEl.classList.add("hide");
 
     cycledQuestions = questions.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
@@ -71,12 +81,19 @@ function startQuiz() {
     setNextQuestion();
 }
 
+//shows next question
+function nextQuestion() {
+    reset();
+    showQuestion(cycledQuestions[currentQuestionIndex]);
+}
 
+function showQuestion(question) {
+    questionEl.innerText = question.question;
+}
 
 //Timer
-
 function startTimer() {
-    interval = setInterval(function() {
+    interval = setInterval(function () {
         counter--;
         if (counter >= 0) {
             showTimer.innerHTML = counter;
@@ -91,5 +108,5 @@ function startTimer() {
 
 //Event listener
 
-$("startButtonEl").click(startQuiz);
+startButton.addEventListener("click", startQuiz);
 
